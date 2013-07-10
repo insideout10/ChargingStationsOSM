@@ -14,7 +14,7 @@ object App {
     lazy val xml: Elem = XML.load(url)
 
     val fields         = ArrayBuffer[String]("id", "version", "timestamp", "uid", "user", "changeset", "lat", "lon")
-    lazy val writer    = new PrintWriter("/Users/david/Desktop/charging-stations.tsv")
+    lazy val writer    = new PrintWriter("charging-stations.tsv")
 
     def nodeMap(n: Node) = Map(
       "id"        -> (n \ "@id").text,
