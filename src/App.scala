@@ -14,6 +14,9 @@ object App {
     lazy val xml: Elem = XML.load(url)
 
     val fields         = ArrayBuffer[String]("id", "version", "timestamp", "uid", "user", "changeset", "lat", "lon")
+    val ignore         = Array[String]("what_kind_of_plug", "addr:city", "addr:country", "addr:housenumber", "refID",
+                         "addr:postcode", "addr:street", "addr:suburb", "fixme", "FIXME", "addr:housename",
+                         "addr:floor", "addr:state")
     lazy val writer    = new PrintWriter("charging-stations.tsv")
 
     def nodeMap(n: Node) = Map(
@@ -38,7 +41,7 @@ object App {
         val v = (t \ "@v").text
 
         nm += (k -> v)
-        if (!fields.contains(k)) fields += k
+        if (!ignore.contains(k) && !fields.contains(k)) fields += k
       }
       printMap(nm)
       writer.print("\n")
