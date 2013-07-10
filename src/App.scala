@@ -1,4 +1,4 @@
-import java.io.{PrintWriter, FileWriter}
+import java.io.PrintWriter
 import java.net.URL
 import scala.xml.{Elem, Node, XML}
 import scala.collection.mutable.ArrayBuffer
@@ -10,7 +10,7 @@ object App {
 
     var nc: Long  = 0
 
-    val url: URL       = new URL("http://open.mapquestapi.com/xapi/api/0.6/node[amenity=charging_station]")
+    val url: URL       = new URL("http://overpass-api.de/api/xapi_meta?*[amenity%3Dcharging_station]")
     lazy val xml: Elem = XML.load(url)
 
     val fields         = ArrayBuffer[String]("id", "version", "timestamp", "uid", "user", "changeset", "lat", "lon")
