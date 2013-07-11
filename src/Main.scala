@@ -32,11 +32,9 @@ object Main extends App {
   def printFields(fs: Seq[String])                        = fs foreach { f => writer.print(f + "\t") }
 
   val fields = nodes.foldLeft(initFields) { (fields, n) =>
-    val nm = (n \ "tag").foldLeft(nodeMap(n)) { (nm, t) =>
-      nm + ((t \ "@k").text -> (t \ "@v").text)
-    }
-
+    val nm = (n \ "tag").foldLeft(nodeMap(n)) { (nm, t) => nm + ((t \ "@k").text -> (t \ "@v").text) }
     val fs = fields ++ ((nm.keySet -- ignoreFields) -- fields)
+
     printMap(nm, fs); writer.print("\n")
 
     fs
